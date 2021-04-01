@@ -1,0 +1,27 @@
+body {
+  font: 500 17px/1.5 'Oxygen', sans-serif;
+   font-weight: bold;
+background-image: url(img.jpeg);
+	background-size: cover;
+	background-position: top center;
+	position: relative;
+	
+color: white;
+
+}
+
+
+
+.table td,
+.table th {
+  padding: 20px;
+color: white;
+}
+
+.tooltip .arrow:before {
+  border-left-color: #dc3545;
+color: white;
+}
+.tooltip .tooltip-inner {
+  background: #dc3545;
+}
