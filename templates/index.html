@@ -1,6 +1,32 @@
 {% extends "base.html" %} {% block content %}
 
-<h2>Upload EEG .set and .fdt file</h2>
+<h2> Upload EEG data in accordance to the table : </h2>
+<h5>
+  <table style="width:100%">
+    <tr>
+      <th> Type of EEG data to be uploaded </th>
+      <th> Number of files to be uploaded </th>
+      <th> Extension of files to be uploaded </th>
+    </tr>
+    <br>
+    <tr>
+      <td> EEGlab </td>
+      <td> 2 </td>
+      <td> .set and .fdt </td>
+    </tr>
+    <tr>
+      <td> BrainVision </td>
+      <td> 3 </td>
+      <td> .vhdr , .vmrk and .dat </td>
+    </tr>
+    <tr>
+      <td> European data format </td>
+      <td> 1 </td>
+      <td> .edf </td>
+    </tr>
+  </table>
+</h5>
+
 
 <div>
     <form id="upload-file" method="post" enctype="multipart/form-data" >
@@ -8,7 +34,7 @@
         <label for="imageUpload" class="upload-label">
             Choose...
         </label>
-        <input type="file" name="file" id="imageUpload" accept=".set ,.fdt " multiple>
+        <input type="file" name="file" id="imageUpload" accept=".set , .fdt , .vhdr , .vmrk , .dat , .edf " multiple>
     </form>
     <!-- <form action="http://jkorpela.fi/cgi-bin/echo.cgi"enctype="multipart/form-data" method="post">
           <!-- <p>
@@ -35,12 +61,12 @@
         </div>
     </div>
 <br/>
-    <div class="loader" style="display:none;"> 
+    <div class="loader" style="display:none;">
 
 </div>
-      
+
     <h3 id="result">
-        
+
     </h3>
 
 </div>

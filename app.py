@@ -56,7 +56,7 @@ def clean_EEG(raw):
 #   Resampling of data
     raw.resample(250, npad="auto")
 #       Removal of bad channels
-    bad_channels=['CB1', 'CB2', 'HEOG', 'VEOG', 'EKG','M1','M2']
+    bad_channels=['CB1', 'CB2', 'HEOG', 'VEOG', 'EKG','M1','M2','Status']
     x=raw.ch_names
     channels_to_remove = []
     for i in x:
@@ -260,7 +260,23 @@ def make_data_pipeline(df,image_size,frame_duration,overlap):
 
 def model_predict(file_path, model):
     # img = image.load_img(img_path, target_size=(224, 224))
-    raw = mne.io.read_raw_eeglab(file_path,preload=True)
+    print(file_path)
+    print(type(file_path))
+    x = file_path.split('.')
+    print(x[-1])
+    if x[-1] == 'set':
+        raw = mne.io.read_raw_eeglab(file_path,preload=True)
+    elif x[-1] == 'vmrk':
+        x[-1] = '.vhdr'
+        file_path=''
+        for i in x:
+            file_path+=i
+        raw = mne.io.read_raw_brainvision(file_path,preload=True)
+    elif x[-1] == 'edf':
+        raw = mne.io.read_raw_edf(file_path,preload=True)
+    else:
+        return -1
+
     # Preprocessing the raw_eeg_file
     # x = image.img_to_array(img)
     x = clean_EEG(raw)
@@ -304,8 +320,11 @@ def upload():
         # f.save(file_path)
 
         # Make prediction
-        name = f[1].filename
+        # name = f[1].filename
+        # print(f[])
         result = model_predict(file_path, model)
+        if type(result) == int and result == -1:
+            return "Format of the file uploaded is not compatible ! You can only upload file of formats : .set or .vhdr or .edf"
         result = result.tolist()
         ans = most_frequent(result)
         if ans == 0:
