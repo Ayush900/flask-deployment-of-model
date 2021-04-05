@@ -1,9 +1,10 @@
 {% extends "base.html" %} {% block content %}
 
-<h2>Upload the EEG file for the subject (Of format .set along with the .fdt file)</h2>
+<h2>Upload EEG .set and .fdt file</h2>
 
 <div>
     <form id="upload-file" method="post" enctype="multipart/form-data" >
+<br/>
         <label for="imageUpload" class="upload-label">
             Choose...
         </label>
@@ -29,15 +30,17 @@
             </div>
         </div> -->
         <div>
-            <h1> To Display Results: </h1>
+            <br/>
             <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
         </div>
     </div>
+<br/>
+    <div class="loader" style="display:none;"> 
 
-    <div class="loader" style="display:none;"></div>
-
+</div>
+      
     <h3 id="result">
-        <span> </span>
+        
     </h3>
 
 </div>
