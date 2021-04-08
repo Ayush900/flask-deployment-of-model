@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,132 +10,314 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>DETECT DEPRESSION !</title>
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
     <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
- <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+
+
 </head>
 <body>
-    <div class="wrapper">
-        <div class="nav">
-            <div class="logo">
-                <h4>Depression Detection.</h4>
-            </div>
-            <div class="links">
 
-                <a href="#" style="color:#2f8be0">Help</a>
-                <a href="#" style="color:#2f8be0">About</a>
-                <a href="#" style="color:#2f8be0">Contact</a>
-            </div>
+    <!-- NAV BAR -->
+
+
+
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Depression Detection</a>
+                </li>
+            </ul>
         </div>
-
-        <div class="landing">
-            <div class="landingText" data-aos="fade-up" data-aos-duration="1000">
-                <h2><span style="color:#2f8be0";font-size: 3vw>EVEN DEPRESSION CAN BE CURED. <span> </h2>
-<br/>
-
-
-                    <div class="container">
-                <div id="content">{% block content %}{% endblock %}</div>
-                        </div>
-
-
-            </div>
-            <div class="landingImage" data-aos="fade-down" data-aos-duration="2000">
-                <img src="{{url_for('static',filename = 'images/bg.png')}}" alt="" >
-            </div>
+        <div class="mx-auto order-0">
+            <a class="navbar-brand mx-auto" href="#">We have got your back ! </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#yaha">Feedback</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- NAV BAR -->
 
-        <!-- ABOUT SECTION -->
-             <div class="meri">
-        <div class="about align-self-center">
-            <div class="aboutText" data-aos="fade-up" data-aos-duration="1000">
-                <h2>Why is <span style="color:#2f8be0;font-size:3vw">Depression Detection </span> important? </h2>
-<br/>
-                <ol>
-                    <li >
-                        <!-- <span style="color:#2f8be0">01</span> -->
-                         <p>Raising depression awareness can help defeat the stigma of the illness and can also help people suffering from it to reach out and get the help that they need to defeat it.</p>
-                    </li>
-                    <li >
-                        <!-- <span style="color:#2f8be0">02</span> -->
-                         <p>Early detection, intervention, and appropriate treatment can promote remission, prevent relapse, and reduce the emotional and financial burden of the disease.</p>
-                    </li>
-                    <li >
-                        <!-- <span style="color:#2f8be0">03</span> -->
-                         <p>There are at least a dozen advantages to obtaining an early and accurate diagnosis when cognitive symptoms are first noticed. These advantages result in a higher quality of life, less stress for family care partners, more time to treasure the present, and increased time for future planning.</p>
-                    </li>
+
+
+
+
+
+    <!-- HOME PAGE -->
+
+
+    <div class="container">
+    
+        <div class="row">
+            <div class=" col-lg-6 col-sm-12 landingText " data-aos="fade-up" data-aos-duration="1500"> 
+
+                <br />
+                <br />
+                <br /><br />
+                <h3 style="color:#2f8be0" >EVEN DEPRESSION CAN BE CURED. </h3>
+                <br />
+                <br />
+                <p><ol>
+                       <li>
+                           Fight your fears.
+                       </li>
                     <li>
-                        <!-- <span style="color:#2f8be0">04</span> -->
-                         <p>Diagnosis is the process of finding out if a patient has a specific disease. A medical professional prescribes a test to make a diagnosis or to exclude possible illness.</p>
-                    </li>
-
-                </ol>
-            </div>
-            <div class="aboutList" data-aos="fade-left" data-aos-duration="1000">
+                        Glad You Are Here.
+                       </li>
+                    </ol></p>
+           </div>
+            <div class=" col-lg-6 col-sm-12 landingImage" data-aos="fade-down" data-aos-duration="2000"> <img src="{{url_for('static',filename = 'images/bg.png')}}" alt="" class="img-fluid home">  </div>
 
 
-<!-- <img  src="{{url_for('static',filename = 'images/doctor-woman-400px.png')}}" alt="" > -->
-            </div>
         </div>
+        
+    </div>
+
+    <!-- HOME PAGE -->
+    <!-- LANDING PAGE -->   
+            <div class="container">
+                <div id="content">{% block content %}{% endblock %}</div>
+            </div>
+
+
+        
+        
+    <br />
+    <br />
+    <br />
+    <br />
+    <!-- ABOUT SECTION -->
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-1">
+            </div>
+            <div class="col-11">
+                <div class="meri">
+                    <div class="about align-self-center">
+                        <div class="aboutText" data-aos="fade-up" data-aos-duration="1000">
+                            <h3>Why is <span style="color:#2f8be0;font-size:3vw">Depression Detection </span> important? </h3>
+                            <br />
+                            <ol>
+                                <li>
+                                    <span style="color:#2f8be0">01</span>
+                                    <p>Raising depression awareness can help defeat the stigma of the illness and can also help people suffering from it to reach out and get the help that they need to defeat it.</p>
+                                </li>
+                                <li>
+                                    <span style="color:#2f8be0">02</span>
+                                    <p>Early detection, intervention, and appropriate treatment can promote remission, prevent relapse, and reduce the emotional and financial burden of the disease.</p>
+                                </li>
+                                <li>
+                                    <span style="color:#2f8be0">03</span>
+                                    <p>There are at least a dozen advantages to obtaining an early and accurate diagnosis when cognitive symptoms are first noticed. These advantages result in a higher quality of life, less stress for family care partners, more time to treasure the present, and increased time for future planning.</p>
+                                </li>
+                                <li>
+                                    <span style="color:#2f8be0">04</span>
+                                    <p>Diagnosis is the process of finding out if a patient has a specific disease. A medical professional prescribes a test to make a diagnosis or to exclude possible illness.</p>
+                                </li>
+
+                            </ol>
+                        </div>
+                        <div class="aboutList" data-aos="fade-left" data-aos-duration="1000">
+
+
+                            <!-- <img  src="{{url_for('static',filename = 'images/doctor-woman-400px.png')}}" alt="" > -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+
+        <br />
+        <br />
+        <br />
 
         <!-- INFO SECTION -->
 
-        <div class="infoSection">
-            <div class="infoHeader" data-aos="fade-up" data-aos-duration="1000">
-                <h1>Things you could do to fight <br> <span style="color:#2f8be0">Depression .</span> </h1>
-            </div>
-            <div class="infoCards">
-                <div class="card one" data-aos="fade-up" data-aos-duration="1000">
-                    <img src="{{url_for('static',filename = 'images/movie.png')}}" class="cardoneImg" alt="" data-aos="fade-up" data-aos-duration="1100">
-                    <div class="cardbgone"></div>
-                    <div class="cardContent">
-                        <h2>Medications</h2>
-                        <p>There are various medications and medical procedures to treat depression and anxiety.</p>
-                        <a href="#">
-
-                        </a>
-                    </div>
-                </div>
-                <div class="card two" data-aos="fade-up" data-aos-duration="1300">
-                    <img src="{{url_for('static',filename = 'images/learn.png')}}" class="cardtwoImg" alt="" data-aos="fade-up" data-aos-duration="1200">
-                    <div class="cardbgtwo"></div>
-                    <div class="cardContent">
-                        <h2>Consult for therapy</h2>
-                        <p>Therapies like yoga, meditation, and acupuncture can keep symptoms of depression at bay by regulating mood.</p>
-                        <a href="#">
-
-                        </a>
-                    </div>
-                </div>
-                <div class="card three" data-aos="fade-up" data-aos-duration="1600">
-                    <img src="{{url_for('static',filename = 'images/videocall.png')}}" class="cardthreeImg" alt="" data-aos="fade-up" data-aos-duration="1300">
-                    <div class="cardbgone"></div>
-                    <div class="cardContent">
-                        <h2>Reach out to Support Groups</h2>
-                        <p>Antidepressants can be helpful on their own, but combining medication and therapy is much more effective for managing depression in the long run.</p>
-                        <a href="#">
-
-                        </a>
+        <div class="infoSection container">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="infoHeader" data-aos="fade-up" data-aos-duration="1000">
+                        <h1>Things you could do to fight <br> <span style="color:#2f8be0">Depression .</span> </h1>
                     </div>
                 </div>
             </div>
+            
+            <div class="row infoCards">
+                <div class="col-3">
+                    <div class="card one" data-aos="fade-up" data-aos-duration="1000">
+                        <img src="{{url_for('static',filename = 'images/movie.png')}}" class="cardoneImg" alt="" data-aos="fade-up" data-aos-duration="1100">
+                        <div class="cardbgone"></div>
+                        <div class="cardContent">
+                            <h3>Medications</h3>
+                            <p>There are various medications and medical procedures to treat depression and anxiety.</p>
+                            <a href="#">
+
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-1"></div>
+
+                <div class="col-3">
+
+                    <div class="card two" data-aos="fade-up" data-aos-duration="1300">
+                        <img src="{{url_for('static',filename = 'images/learn.png')}}" class="cardtwoImg" alt="" data-aos="fade-up" data-aos-duration="1200">
+                        
+                        <div class="cardbgtwo"></div>
+                        
+                        <div class="cardContent">
+                            <h3>Consult for therapy</h3>
+                            <p>Therapies like yoga, meditation, and acupuncture can keep symptoms of depression at bay by regulating mood.</p>
+                            <a href="#">
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1"> </div>
+
+                <div class="col-3">
+                    <div class="card three" data-aos="fade-up" data-aos-duration="1600">
+                        <img src="{{url_for('static',filename = 'images/videocall.png')}}" class="cardthreeImg" alt="" data-aos="fade-up" data-aos-duration="1300">
+                        <div class="cardbgone"></div>
+                        <div class="cardContent">
+                            <h3>Reach out to Support Groups</h3>
+                            <p>Combining medication and therapy is much more effective for managing depression in the long run.</p>
+                            <a href="#">
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1"> </div>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- SURVEYYY-->
+        <div id="yaha" data-aos="fade-up" data-aos-duration="1000">
+
+            <h3 id="description" style="color: #e0501b">Please fill our survey to let us know how we can improve our Project :)</h3>
+            <form method="POST" action="https://www.mailmunch.com/blog/wp-content/uploads/2019/11/Thank-you-page-examples.jpg" id="survey-form">
+                <div>
+                 <h4>   <label for="name" id="name-label">Name:</label> </h4>
+                    <input class="input-elm" type="text" name="name" id="name" required placeholder="Your Full Name">
+                </div> <div>
+
+                 <h4>   <label for="email" id="email-label">Email:</label> </h4>
+                    <input class="input-elm" type="email" name="email" id="email" required placeholder="Your Email ID">
+                </div>
+
+
+                <div>
+                   <h4>  Do you find the problem useful in current scenario ?<br> </h4>
+                    <input required class="input-elm input-radio" type="radio" name="likely1" value="11" id="11"> <label for="11">Disagree</label>
+                    <input required class="input-elm input-radio" type="radio" name="likely1" value="12" id="12"> <label for="12">Neutral</label>
+                    <input required  class="input-elm input-radio" type="radio" name="likely1" value="13" id="13"> <label for="13">Agree</label>
+                </div>
+
+
+                
+
+
+
+
+
+                <div>
+                   <h4> Are you able to use the solution in public domain ? </h4><br>
+                    <input required class="input-elm input-radio" type="radio" name="likely2" value="21" id="21"> <label for="21">Disagree</label>
+                    <input required class="input-elm input-radio" type="radio" name="likely2" value="22" id="22"> <label for="22">Neutral</label>
+                    <input required class="input-elm input-radio" type="radio" name="likely2" value="23" id="23"> <label for="23">Agree</label>
+                </div>
+
+
+
+
+
+
+                <div>
+                   <h4> Is the solution impactful ?</h4><br>
+                    <input required class="input-elm input-radio" type="radio" name="likely3" value="31" id="31"> <label for="31">Disagree</label>
+                    <input required class="input-elm input-radio" type="radio" name="likely3" value="32" id="32"> <label for="32">Neutral</label>
+                    <input required class="input-elm input-radio" type="radio" name="likely3" value="33" id="33"> <label for="33">Agree</label>
+                </div>
+
+
+
+
+                <div>
+                   <h4> Do you find the solution cost affective ? </h4> <br>
+                    <input required class="input-elm input-radio" type="radio" name="likely4" value="41" id="41"> <label for="41">Disagree</label>
+                    <input required  class="input-elm input-radio" type="radio" name="likely4" value="42" id="42"> <label for="42">Neutral</label>
+                    <input required class="input-elm input-radio" type="radio" name="likely4" value="43" id="43"> <label for="43">Agree</label>
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col-4">
+
+
+                    </div>
+                    <div class="col-8">
+                        <button class="btn btn-info btn-group" type="submit" id="submit">Submit Form</button>
+
+                    </div>
+                </div>
+
+            </form>
         </div>
-
-
+        <!-- SURVEYY-->
         <!-- BANNER AND FOOTER -->
 
         <div class="banner">
 
 
- <div class="container">
-<h1 style="color:#2f8be0 "> EEG For Depression Detection </h1> <br/>
-<h3> Electroencephalography, or EEG, technology that measures brain function could encourage earlier diagnoses of common mental and neurological disorders, including Depression, autism, ADHD and dementia.</h3>
- </div>
+            <div class="container">
+                <h1 style="color:#2f8be0 "> EEG For Depression Detection </h1> <br />
+                <h3> Electroencephalography, or EEG, technology that measures brain function could encourage earlier diagnoses of common mental and neurological disorders, including Depression, autism, ADHD and dementia.</h3>
+            </div>
             <div class="bannerText" data-aos="fade-right" data-aos-duration="1000">
 
                 <a href="#"> <img src="img/AndroidPNG.png" alt=""> </a>
@@ -143,25 +329,27 @@
         </div>
 
         <div class="footer">
-<br/>
-<br/>
+            <br />
+            <br />
             <h2>You Are Cured ! </h2>
 
         </div>
     </div>
 
 
-</div>
+    </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script >
-            AOS.init();
+    <script>
+        AOS.init();
+        new WOW().init();
+
     </script>
 </body>
 
 
 
-
+     
 
 
 

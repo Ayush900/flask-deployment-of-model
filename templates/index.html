@@ -1,74 +1,104 @@
 {% extends "base.html" %} {% block content %}
 
-<h2> Upload EEG data in accordance to the table : </h2>
-<h5>
-  <table style="width:100%">
-    <tr>
-      <th> Type of EEG data to be uploaded </th>
-      <th> Number of files to be uploaded </th>
-      <th> Extension of files to be uploaded </th>
-    </tr>
-    <br>
-    <tr>
-      <td> EEGlab </td>
-      <td> 2 </td>
-      <td> .set and .fdt </td>
-    </tr>
-    <tr>
-      <td> BrainVision </td>
-      <td> 3 </td>
-      <td> .vhdr , .vmrk and .dat </td>
-    </tr>
-    <tr>
-      <td> European data format </td>
-      <td> 1 </td>
-      <td> .edf </td>
-    </tr>
-  </table>
-</h5>
+
+<br />
+<br />
+<br />
+<div class="container" data-aos="fade-up" data-aos-duration="1000">
 
 
-<div>
-    <form id="upload-file" method="post" enctype="multipart/form-data" >
-<br/>
-        <label for="imageUpload" class="upload-label">
-            Choose...
-        </label>
-        <input type="file" name="file" id="imageUpload" accept=".set , .fdt , .vhdr , .vmrk , .dat , .edf " multiple>
-    </form>
-    <!-- <form action="http://jkorpela.fi/cgi-bin/echo.cgi"enctype="multipart/form-data" method="post">
-          <!-- <p>
-          Type some text (if you like):<br>
-          <input type="text" name="textline" size="30">
-          </p> -->
-          <!-- <p>
-          Please specify a file, or a set of files:<br>
-          <input type="file" name="datafile" multiple>
-          </p>
-          <div>
-          <input type="submit" value="Send">
-          </div> -->
-      <!-- </form> -->
+    <div class="row">
+        <div class="col-7">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col"> Type of EEG data to be uploaded </th>
+                        <th scope="col"> Number of files to be uploaded </th>
+                        <th scope="col"> Extension of files to be uploaded </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row"> EEGlab </td>
+                        <td> 2 </td>
+                        <td> .set and .fdt </td>
+                    </tr>
+                    <tr>
+                        <td scope="row"> BrainVision </td>
+                        <td> 3 </td>
+                        <td> .vhdr , .vmrk and .dat </td>
+                    </tr>
+                    <tr>
+                        <td scope="row"> European data format </td>
+                        <td> 1 </td>
+                        <td> .edf </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-2"> </div>
+            <div class="col-3">
 
-    <div class="image-section" style="display:none;">
-        <!-- <div class="img-preview">
-            <div id="imagePreview">
+                <div>
+
+                    <form id="upload-file" method="post" enctype="multipart/form-data">
+                        <br />
+
+                        <input type="file" name="file" id="imageUpload" accept=".set , .fdt , .vhdr , .vmrk , .dat , .edf " multiple class="upload-label" >
+                    </form>
+
+
+                    <div class="image-section" style="display:none;">
+
+                        <div>
+                            <br />
+                            <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="loader" style="display:none;">
+
+                    </div>
+
+
+
+                </div>
+
+
+
             </div>
-        </div> -->
-        <div>
-            <br/>
-            <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
         </div>
     </div>
-<br/>
-    <div class="loader" style="display:none;">
 
-</div>
 
-    <h3 id="result">
 
-    </h3>
 
-</div>
+<br />
+
+
+
+<div class="container" >
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10"><h2 id="result" style="color: #2f8be0;"></h2></div>
+        <div class="col-1"></div>
+    </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {% endblock %}
