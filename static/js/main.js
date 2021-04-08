@@ -3,6 +3,7 @@ $(document).ready(function () {
     $('.image-section').hide();
     $('.loader').hide();
     $('#result').hide();
+   
 
     // Upload Preview
     function readURL(input) {
@@ -46,9 +47,10 @@ $(document).ready(function () {
             async: true,
             success: function (data) {
                 // Get and display the result
-                $('.loader').hide();
+                $('.loader').hide();                
                 $('#result').fadeIn(600);
                 $('#result').text(' Result:  ' + data);
+               
                 console.log('Success!');
             },
         });

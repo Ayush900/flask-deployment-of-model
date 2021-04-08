@@ -1,13 +1,13 @@
-html,body{
+html, body {
     background-color: #fff;
-    font-family: 'Source Sans Pro',sans-serif;
+    font-family: 'Calistoga', cursive;
     overflow-x: hidden !important;
     margin: 0px !important;
     padding: 0px !important;
 }
 
 *{
-    text-decoration: none !important;
+    text-decoration: none !important; 
 }
 
 
@@ -35,24 +35,22 @@ html,body{
     background-position: center;
 }
 
-input[type="file"] {
-    display: none;
-}
 
-.upload-label{
+/*
+.upload-label {
     display: inline-block;
     padding: 12px 30px;
     background: #39D2B4;
     color: #fff;
     font-size: 1em;
     transition: all .4s;
-    cursor: pointer;
+    cursor: pointer; 
 }
 
 .upload-label:hover{
     background: #34495E;
     color: #39D2B4;
-}
+} */
 
 .loader {
     border: 8px solid #f3f3f3; /* Light grey */
@@ -68,6 +66,7 @@ input[type="file"] {
     100% { transform: rotate(360deg); }
 }
 
+/*
 .nav{
     position: fixed;
     z-index: 1000;
@@ -102,6 +101,7 @@ input[type="file"] {
     font-weight: bold;
     margin-left: 25px;
 }
+    */
 
 /* LANDING CSS */
 
@@ -114,6 +114,7 @@ input[type="file"] {
     height: 100vh;
 }
 
+/*
 .landingText h2{
     font-size: 6vw;
     margin: 0 !important;
@@ -139,7 +140,7 @@ input[type="file"] {
     font-size: 1.2vw;
     color: #fff;
 }
-
+*/
 .landingImage img{
     width: 28vw;
 }
@@ -189,6 +190,7 @@ ol li{
     border-bottom: 1px solid #ebebeb;
 }
 
+   
 li p{
     font-size: 16px;
     color: #000;
@@ -234,19 +236,19 @@ li span{
     width: 180px;
     position: absolute;
     top: -50px;
-    right: -50px;
+    right: 100px;
 }
 .infoCards .two .cardtwoImg{
     width: 158px;
     position: absolute;
     top: -50px;
-    right: -50px;
+    right: 100px;
 }
 .infoCards .three .cardthreeImg{
     width: 200px;
     position: absolute;
     top: -50px;
-    right: -50px;
+    right: 100px;
 }
 
 .cardbgone{
@@ -351,25 +353,6 @@ li span{
 
 @media only screen and (max-width: 600px){
 
-.nav{
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 20px;
-    height: auto;
-    overflow-y: hidden;
-}
-
-.nav h4{
-    font-size: 6vw;
-    margin-top: 10px;
-    margin-bottom: 14px;
-}
-
-.nav .links a{
-    margin-right: 25px;
-    font-size: 12px;
-    font-weight: 600;
-}
 
 
 /* LANDING PAGE */
@@ -381,7 +364,7 @@ li span{
     justify-content: center;
     text-align: center
 }
-
+/*
 .landingText h1{
     font-size: 6vw;
     margin: 0 !important;
@@ -403,7 +386,7 @@ li span{
     width: 52vw;
     margin-bottom: 20px;
 }
-
+ */
 
 /* ABOUT */
 
@@ -526,13 +509,134 @@ li p{
 
 
 
+/*NAV BAR */
 
 
 
 
 
+    /* NAV BAR */
 
 
+
+/*HOME PAGE*/
+#videoBG{
+position:fixed;
+z-index: -1;
+}
+
+.home  {
+    max-width: 100%;
+    height: auto;
+}
+/*HOME PAGE*/
+
+/* SURVEY FORM*/
+
+
+
+/*
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    outline: none;
+    line-height: 2;
+}
+
+html, body {
+    color: white;
+    font-size: 15px;
+    font-family: 'Comfortaa', cursive;
+    background-image: url(img.jpg); 
+    background-size: cover;
+    background-position: top center;
+    position: relative;
+    font-weight: bold;
+}
+
+    */
+.list-items {
+    list-style: none;
+}
+
+.input-elm {
+    margin-top: 1em;
+    width: 100%;
+    height: 2em;
+    background-color: transparent;
+    border-bottom: 0.1em dotted #ffffff;
+    font-size: 15px;
+}
+
+.input-radio, .input-checkbox {
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    width: 2em;
+    height: .9em;
+}
+
+.select-elm {
+    margin-top: 1em;
+    width: 100%;
+    background-color: transparent;
+    font-size: 15px;
+    color: #505050;
+    border-bottom: 0.1em dotted #ffffff;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+}
+
+.textarea-elm {
+    margin-top: 1em;
+    width: 100%;
+    height: 9em;
+    font-size: 15px;
+    background-color: transparent;
+    border: 0.1em dotted #ffffff;
+}
+
+.button-elm {
+    margin: auto;
+    margin-top: 5.75em;
+    width: 100%;
+    height: 2.75em;
+    font-size: 15px;
+    border-radius: 0.3em;
+    color: #505050;
+    display: block;
+}
+
+#title {
+    margin-top: 0.75em;
+    text-align: center;
+    font-size: 30px;
+}
+
+#description {
+    margin-top: 1.75em;
+    text-align: center;
+    font-size: 1.75em;
+}
+
+.desc-foot {
+    text-align: right;
+    font-size: 20px;
+}
+
+#survey-form {
+    margin: auto;
+    margin-top: 2.55em;
+    margin-bottom: 2.55em;
+    padding: 0 1.2em;
+    max-width: 35em;
+    font-size: 20px;
+}
+
+    #survey-form div {
+        margin-top: 1.75em;
+    }
+/* SURVEY FORM*/
 
 
 
