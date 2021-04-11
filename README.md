@@ -53,10 +53,10 @@ is made using the model which would then be displayed on the screen.
 
 ### Files which could be used for prediction
 
-## Type of EEG data to be uploaded          Number of files to be uploaded            Extension of files to be uploaded
-#  EEGlab                                   2                                         .set and .fdt
-#  BrainVision                              3                                         .vhdr , .vmrk and .dat
-#  European data format                     1                                         .edf
+## Type of EEG data to be uploaded    ||      Number of files to be uploaded    ||        Extension of files to be uploaded
+#  EEGlab                             ||     2                                  ||       .set and .fdt
+#  BrainVision                        ||      3                                 ||       .vhdr , .vmrk and .dat
+#  European data format               ||      1                                 ||        .edf
 
 
 
