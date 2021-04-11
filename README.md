@@ -15,7 +15,7 @@ Accession: d003
 https://docs.google.com/spreadsheets/d/1Ltiheuj3ifW_92J-VCAF3AYsaIYeyM_9pnoIZfc-_DM/edit#gid=0
 
 
-### Instructions
+### Instructions For the codes found in different files
 
 The file Preprocessing_on_raw_EEG_using_MNE_package.ipynb consists the code for the Preprocessing of the EEG data using the mne package pf python .
 The preprocessing steps taken are :
