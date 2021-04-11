@@ -17,7 +17,7 @@ https://docs.google.com/spreadsheets/d/1Ltiheuj3ifW_92J-VCAF3AYsaIYeyM_9pnoIZfc-
 
 ### Instructions For the codes found in different files
 
-The file Preprocessing_on_raw_EEG_using_MNE_package.ipynb consists the code for the Preprocessing of the EEG data using the mne package pf python .
+The file Preprocessing_on_raw_EEG_using_MNE_package.ipynb consists the code for the preprocessing of the EEG data using the MNE package of Python .
 The preprocessing steps taken are :
 1.Rereferencing using the mastoid electrodes (M1,M2)
 2.Band Pass Filtering
@@ -38,17 +38,17 @@ The rest of the files contribute to the flask structure for the deployment of ou
 ### Brief Explaination of Approach and what has been achieved so far
 
 For the deployment of our model we have prefered the
-pythons framework flask . Having finished training our
+Python's framework flask . Having finished training our
 model we saved our model as a .h5 extension file and imported it
 on our backend.
-From the frontend when we upload a files of different formats explained later 
-on which we would like to predict , our backend
+From the frontend when we upload files of different formats
+on which we have given the prediction, our backend
 first cleans up our file to remove all the artifacts and the bad
-channels from the raw EEG by applying all the preprocessing steps as explained earlier and then converts it into a dataframe which
+channels from the raw EEG by applying all the preprocessing steps and then converts it into a dataframe which
 contains the time series data , which is further converted to
-frequency band data by applying fft . The spacial images are
-formed which are in turn fed into our model and the prediction
-is made using the model which would then be displayed on the screen.
+frequency band data by applying FFT . The spacial images are
+formed which are in turn fed into our model.We have fed theta,alpha and delta band images and the prediction
+is made using the deep learning model which would then be displayed on the screen.
 
 
 ### Files which could be used for prediction
