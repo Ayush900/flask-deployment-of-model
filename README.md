@@ -44,7 +44,7 @@ on our backend.
 From the frontend when we upload a files of different formats explained later 
 on which we would like to predict , our backend
 first cleans up our file to remove all the artifacts and the bad
-channels from the raw EEG and converts it into a dataframe which
+channels from the raw EEG by applying all the preprocessing steps as explained earlier and then converts it into a dataframe which
 contains the time series data , which is further converted to
 frequency band data by applying fft . The spacial images are
 formed which are in turn fed into our model and the prediction
