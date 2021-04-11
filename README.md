@@ -30,3 +30,29 @@ The preprocessing steps taken are :
 The model.py file consist the code for the approach to train the model which would be used to make predictions .
 We have used the CNN model for the training of our model , as the data which is to be used to train the model
 eventually are images , for which the CNN is best suited.
+
+
+
+The rest of the files contribute to the flask structure for the deployment of our model .
+
+### Brief Explsination of Approach
+
+For the deployment of our model we have prefered the
+pythons framework flask . Having finished training our
+model we saved our model as a .h5 extension file and imported it
+on our backend.
+From the frontend when we upload a files of different formats explained later 
+on which we would like to predict , our backend
+first cleans up our file to remove all the artifacts and the bad
+channels from the raw EEG and converts it into a dataframe which
+contains the time series data , which is further converted to
+frequency band data by applying fft . The spacial images are
+formed which are in turn fed into our model and the prediction
+is made using the model which would then be displayed on the screen.
+
+
+
+
+
+
+
