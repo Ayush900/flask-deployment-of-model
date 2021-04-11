@@ -62,3 +62,12 @@ is made using the model which would then be displayed on the screen.
 
 
 
+
+
+
+## How to run the model
+1. Download ALL the repository files as a zip folder
+2. Extract and Open the command prompt for this folder
+3. Type the command "python app.py" in the command prompt
+4. Install all the necessary system requirements (mne, flask, tensorflow etc) as per the need
+5. Once the command "python app.py" is successful , copy the link address generated and open it in your web browser to see the model running.
