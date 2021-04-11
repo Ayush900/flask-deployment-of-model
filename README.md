@@ -35,7 +35,7 @@ eventually are images , for which the CNN is best suited.
 
 The rest of the files contribute to the flask structure for the deployment of our model .
 
-### Brief Explsination of Approach
+### Brief Explaination of Approach
 
 For the deployment of our model we have prefered the
 pythons framework flask . Having finished training our
