@@ -122,7 +122,6 @@ def make_steps(samples,frame_duration,overlap):
     samples - number of samples in the session
     frame_duration - frame duration in seconds
     overlap - float fraction of frame to overlap in range (0,1)
-
     out: list of tuple ranges
     '''
     #steps = np.arange(0,len(df),frame_length)
@@ -168,7 +167,6 @@ def make_data_pipeline(df,image_size,frame_duration,overlap):
     image_size - int size of output images in form (x, x)
     frame_duration - time length of each frame (seconds)
     overlap - float fraction of frame to overlap in range (0,1)
-
     OUT:
     X: np array of frames (unshuffled)
     y: np array of label for each frame (1 or 0)
