@@ -1,6 +1,8 @@
 def channels_to_consider(raw):
     """
-    For channels to consider , covering the functionality for channel independance
+    For channels to consider , covering the functionality for channel independence
+    Any EEG data following the main 10-20 EEG system having channel number 
+    less than or equal to 67 channels can be uploaded
     """
     totalchannels = ['FPZ',
                      'FP2',
