@@ -49,14 +49,97 @@ def theta_alpha_delta_averages(f,Y):
     delta = Y[(f>delta_range[0]) & (f<=delta_range[1])].mean()
     return theta, alpha, delta
 
+def channels_to_consider(raw):
+    """
+    For channels to consider , covering the functionality for channel independance
+    """
+    totalchannels = ['FPZ',
+                     'FP2',
+                     'AF3',
+                     'AF4',
+                     'F7',
+                     'F5',
+                     'F3',
+                     'F1',
+                     'FZ',
+                     'F2',
+                     'F4',
+                     'F6',
+                     'F8',
+                     'FT7',
+                     'FC5',
+                     'FC3',
+                     'FC1',
+                     'FCZ',
+                     'FC2',
+                     'FC4',
+                     'FC6',
+                     'FT8',
+                     'T7',
+                     'C5',
+                     'C3',
+                     'C1',
+                     'CZ',
+                     'C2',
+                     'C4',
+                     'C6',
+                     'T8',
+                     'M1',
+                     'TP7',
+                     'CP5',
+                     'CP3',
+                     'CP1',
+                     'CPZ',
+                     'CP2',
+                     'CP4',
+                     'CP6',
+                     'TP8',
+                     'M2',
+                     'P7',
+                     'P5',
+                     'P3',
+                     'P1',
+                     'PZ',
+                     'P2',
+                     'P4',
+                     'P6',
+                     'P8',
+                     'PO7',
+                     'PO5',
+                     'PO3',
+                     'POZ',
+                     'PO4',
+                     'PO6',
+                     'PO8',
+                     'CB1',
+                     'O1',
+                     'OZ',
+                     'O2',
+                     'CB2',
+                     'HEOG',
+                     'VEOG',
+                     'EKG',
+                     'FP1']
+    uploaded_channels = raw.ch_names
+    common_channels=[]
+    for i in uploaded_channels:
+        if i in totalchannels:
+            common_channels.append(i)
+    todrop = list(set(uploaded_channels) - set(common_channels))
+    raw.drop_channels(ch_names=todrop)
+    return raw
+
 def clean_EEG(raw):
-    raw.set_eeg_reference(ref_channels=['M1', 'M2'])
+    raw=channels_to_consider(raw)
+    if ['M1', 'M2'] in raw.ch_names:
+        raw.set_eeg_reference(ref_channels=['M1', 'M2'])
+
 #   Band Pass filtering
     raw.filter(0.5, 45, fir_design='firwin')
 #   Resampling of data
     raw.resample(250, npad="auto")
 #       Removal of bad channels
-    bad_channels=['CB1', 'CB2', 'HEOG', 'VEOG', 'EKG','M1','M2','Status']
+    bad_channels=['CB1', 'CB2', 'HEOG', 'VEOG', 'EKG','M1','M2']
     x=raw.ch_names
     channels_to_remove = []
     for i in x:
@@ -87,6 +170,7 @@ def clean_EEG(raw):
         j+=1
     df=df.rename(columns=res)
     return df
+
 
 
 
