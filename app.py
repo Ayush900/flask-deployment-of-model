@@ -7,6 +7,16 @@ import re
 import numpy as np
 import mne
 from eeg_learn_functions import *
+import pylsl
+
+from pylsl import StreamInlet, resolve_stream
+import time
+
+import pandas as pd
+
+import getopt
+
+from random import random as rand
 
 # Keras
 from keras.applications.imagenet_utils import preprocess_input, decode_predictions
@@ -53,9 +63,73 @@ def channels_to_consider(raw):
     """
     For channels to consider , covering the functionality for channel independance
     """
-    totalchannels = ['FPZ','FP2','AF3','AF4','F7','F5','F3','F1','FZ','F2','F4','F6','F8','FT7','FC5','FC3','FC1','FCZ','FC2','FC4',
-                     'FC6','FT8','T7','C5','C3','C1','CZ','C2','C4','C6','T8','M1','TP7','CP5','CP3','CP1','CPZ','CP2','CP4','CP6','TP8',
-                     'M2','P7','P5','P3','P1','PZ','P2','P4','P6','P8','PO7','PO5','PO3','POZ','PO4','PO6','PO8','CB1','O1','OZ','O2','CB2','HEOG','VEOG','EKG','FP1']
+    totalchannels = ['FPZ',
+                     'FP2',
+                     'AF3',
+                     'AF4',
+                     'F7',
+                     'F5',
+                     'F3',
+                     'F1',
+                     'FZ',
+                     'F2',
+                     'F4',
+                     'F6',
+                     'F8',
+                     'FT7',
+                     'FC5',
+                     'FC3',
+                     'FC1',
+                     'FCZ',
+                     'FC2',
+                     'FC4',
+                     'FC6',
+                     'FT8',
+                     'T7',
+                     'C5',
+                     'C3',
+                     'C1',
+                     'CZ',
+                     'C2',
+                     'C4',
+                     'C6',
+                     'T8',
+                     'M1',
+                     'TP7',
+                     'CP5',
+                     'CP3',
+                     'CP1',
+                     'CPZ',
+                     'CP2',
+                     'CP4',
+                     'CP6',
+                     'TP8',
+                     'M2',
+                     'P7',
+                     'P5',
+                     'P3',
+                     'P1',
+                     'PZ',
+                     'P2',
+                     'P4',
+                     'P6',
+                     'P8',
+                     'PO7',
+                     'PO5',
+                     'PO3',
+                     'POZ',
+                     'PO4',
+                     'PO6',
+                     'PO8',
+                     'CB1',
+                     'O1',
+                     'OZ',
+                     'O2',
+                     'CB2',
+                     'HEOG',
+                     'VEOG',
+                     'EKG',
+                     'FP1']
     uploaded_channels = raw.ch_names
     common_channels=[]
     for i in uploaded_channels:
@@ -64,6 +138,86 @@ def channels_to_consider(raw):
     todrop = list(set(uploaded_channels) - set(common_channels))
     raw.drop_channels(ch_names=todrop)
     return raw
+
+def channels_to_consider_realtime(df):
+    """
+    For channels to consider , covering the functionality for channel independance
+    """
+    totalchannels = ['FPZ',
+                     'FP2',
+                     'AF3',
+                     'AF4',
+                     'F7',
+                     'F5',
+                     'F3',
+                     'F1',
+                     'FZ',
+                     'F2',
+                     'F4',
+                     'F6',
+                     'F8',
+                     'FT7',
+                     'FC5',
+                     'FC3',
+                     'FC1',
+                     'FCZ',
+                     'FC2',
+                     'FC4',
+                     'FC6',
+                     'FT8',
+                     'T7',
+                     'C5',
+                     'C3',
+                     'C1',
+                     'CZ',
+                     'C2',
+                     'C4',
+                     'C6',
+                     'T8',
+                     'M1',
+                     'TP7',
+                     'CP5',
+                     'CP3',
+                     'CP1',
+                     'CPZ',
+                     'CP2',
+                     'CP4',
+                     'CP6',
+                     'TP8',
+                     'M2',
+                     'P7',
+                     'P5',
+                     'P3',
+                     'P1',
+                     'PZ',
+                     'P2',
+                     'P4',
+                     'P6',
+                     'P8',
+                     'PO7',
+                     'PO5',
+                     'PO3',
+                     'POZ',
+                     'PO4',
+                     'PO6',
+                     'PO8',
+                     'CB1',
+                     'O1',
+                     'OZ',
+                     'O2',
+                     'CB2',
+                     'HEOG',
+                     'VEOG',
+                     'EKG',
+                     'FP1']
+    uploaded_channels = list(df.columns)
+    common_channels=[]
+    for i in uploaded_channels:
+        if i in totalchannels:
+            common_channels.append(i)
+    todrop = list(set(uploaded_channels) - set(common_channels))
+    df.drop(todrop , axis='columns', inplace=True)
+    return df
 
 def clean_EEG(raw):
     raw=channels_to_consider(raw)
@@ -165,13 +319,18 @@ def make_frames(df,frame_duration):
     frames = []
     overlap = 0.5
     steps = make_steps(len(df),frame_duration,overlap)
+    print(steps)
     for i,_ in enumerate(steps):
         frame = []
         if i == 0:
             continue
         else:
             for channel in df.columns:
-                snippet = np.array(df.loc[steps[i][0]:steps[i][1],int(channel)])
+                # print('check1:',steps[i][0])
+                # print('check2:',steps[i][1])
+                # print('check3:',int(channel))
+                # brea
+                snippet = np.array(df.iloc[int(steps[i][0]):int(steps[i][1]),int(channel)])
                 f,Y =  get_fft(snippet)
                 theta, alpha, delta = theta_alpha_delta_averages(f,Y)
                 frame.append([theta, alpha, delta])
@@ -201,7 +360,7 @@ def make_data_pipeline(df,image_size,frame_duration,overlap):
 
     X_0 = make_frames(df,frame_duration)
 
-    X_1 = X_0.reshape(len(X_0),60*3)
+    X_1 = X_0.reshape(len(X_0),len(list(df.columns))*3)
     locs_2d = [(-0.014727233440632792, 0.31252079949385286),
      (-0.0, 0.0),
      (0.014727233440632793, -0.3125207994938529),
@@ -320,6 +479,239 @@ def index():
 
 def most_frequent(List):
     return max(set(List), key = List.count)
+
+def startstream():
+    srate = 100
+    name = 'LSLExampleAmp'
+    stream_type = 'EEG'
+    channel_names = [
+         'FP1',
+         'FPZ',
+         'FP2',
+         # 'lal',
+         'AF3',
+         'AF4',
+         'F7',
+         'F5',
+         'F3',
+         'F1',
+         'FZ',
+         'F2',
+         'F4',
+         'F6',
+         'F8',
+         'FT7',
+         'FC5',
+         'FC3',
+         'FC1',
+         'FCZ',
+         'FC2',
+         'FC4',
+         'FC6',
+         'FT8',
+         'T7',
+         'C5',
+         'C3',
+         'C1',
+         'CZ',
+         'C2',
+         'C4',
+         'C6',
+         'T8',
+         # 'M1',
+         'TP7',
+         'CP5',
+         'CP3',
+         'CP1',
+         'CPZ',
+         'CP2',
+         'CP4',
+         'CP6',
+         'TP8',
+         # 'M2',
+         'P7',
+         'P5',
+         'P3',
+         'P1',
+         'PZ',
+         'P2',
+         'P4',
+         'P6',
+         'P8',
+         'PO7',
+         'PO5',
+         'PO3',
+         'POZ',
+         'PO4',
+         'PO6',
+         'PO8',
+         # 'CB1',
+         'O1',
+         'OZ',
+         'O2',
+         # 'CB2',
+         # 'HEOG',
+         # 'VEOG',
+         # 'Status'
+         ]
+    n_channels = len(channel_names)
+    help_string = 'SendData.py -s <sampling_rate> -n <stream_name> -t <stream_type>'
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "hs:n:t:", longopts=["srate=", "name=", "type"])
+    except getopt.GetoptError:
+        print(help_string)
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt == '-h':
+            print(help_string)
+            sys.exit()
+        elif opt in ("-s", "--srate"):
+            srate = float(arg)
+        elif opt in ("-n", "--name"):
+            name = arg
+        elif opt in ("-t", "--type"):
+            stream_type = arg
+
+    # first create a new stream info (here we set the name to BioSemi,
+    # the content-type to EEG, 8 channels, 100 Hz, and float-valued data) The
+    # last value would be the serial number of the device or some other more or
+    # less locally unique identifier for the stream as far as available (you
+    # could also omit it but interrupted connections wouldn't auto-recover).
+    info = pylsl.StreamInfo(name, stream_type, n_channels, srate, 'float32', 'myuid2424')
+
+    # append some meta-data
+    info.desc().append_child_value("manufacturer", "LSLExampleAmp")
+    chns = info.desc().append_child("channels")
+    for label in channel_names:
+        ch = chns.append_child("channel")
+        ch.append_child_value("label", label)
+        ch.append_child_value("unit", "microvolts")
+        ch.append_child_value("type", "EEG")
+    info.desc().append_child_value("manufacturer", "LSLExamples")
+    cap = info.desc().append_child("cap")
+    cap.append_child_value("name", "ComfyCap")
+    cap.append_child_value("size", "54")
+    cap.append_child_value("labelscheme", "10-20")
+
+    # next make an outlet; we set the transmission chunk size to 32 samples and
+    # the outgoing buffer size to 360 seconds (max.)
+    outlet = pylsl.StreamOutlet(info, 32, 1)
+
+    if False:
+        # It's unnecessary to check the info when the stream was created in the same scope; just use info.
+        # Use this code only as a sanity check if you think something when wrong during stream creation.
+        check_info = outlet.get_info()
+        assert check_info.name() == name
+        assert check_info.type() == stream_type
+        assert check_info.channel_count() == len(channel_names)
+        assert check_info.channel_format() == pylsl.cf_float32
+        assert check_info.nominal_srate() == srate
+
+    print("now sending data...")
+    start_time = pylsl.local_clock()
+    sent_samples = 0
+    while True:
+        elapsed_time = pylsl.local_clock() - start_time
+        required_samples = int(srate * elapsed_time) - sent_samples
+        if required_samples > 0:
+            # make a chunk==array of length required_samples, where each element in the array
+            # is a new random n_channels sample vector
+            mychunk = [[rand() for chan_ix in range(n_channels)]
+                       for samp_ix in range(required_samples)]
+            # get a time stamp in seconds (we pretend that our samples are actually
+            # 125ms old, e.g., as if coming from some external hardware)
+            stamp = pylsl.local_clock() - 0.125
+            # now send it and wait for a bit
+            # Note that even though `rand()` returns a 64-bit value, the `push_chunk` method
+            #  will convert it to c_float before passing the data to liblsl.
+            outlet.push_chunk(mychunk, stamp)
+            sent_samples += required_samples
+        time.sleep(0.02)
+    return
+
+
+@app.route('/get_realtime_eeg_data',methods=['GET'])
+def get_realtime_eeg_data():
+    startstream()
+
+
+
+    print("looking for an EEG stream...")
+    streams = resolve_stream('type', 'EEG')
+
+    # create a new inlet to read from the stream
+    inlet = StreamInlet(streams[0])
+
+    start_time = time.time()
+    seconds = 15
+
+    data=[]
+
+    while True:
+
+        chunk, timestamps = inlet.pull_chunk()
+        if timestamps:
+            for i in chunk:
+                data.append(i)
+
+        current_time = time.time()
+        elapsed_time = current_time - start_time
+
+        if elapsed_time > seconds:
+            print("Finished iterating in: " + str(int(elapsed_time))  + " seconds")
+            break
+
+    index=[]
+    for i in range(len(data)):
+        index.append(str(i*4))
+
+    info = inlet.info()
+
+    ch = info.desc().child("channels").child("channel")
+
+    channels=[]
+
+    for k in range(info.channel_count()):
+        channels.append(ch.child_value("label"))
+        ch = ch.next_sibling()
+
+    df = pd.DataFrame(data, columns = channels , index=index)
+
+    df=channels_to_consider_realtime(df)
+
+    channels_remain=df.columns
+
+    x=list(df.columns)
+
+    for i in range(len(x)):
+        x[i]=i
+
+    df.columns = x
+
+    image_size = 28                                                                               # 1 = current_mdd
+    frame_duration = 1.0                                                                          # 2 = past_mdd
+    overlap = 0.5
+    images = make_data_pipeline(df,image_size,frame_duration,overlap)
+    x = images
+
+    print(x)
+
+    result = model.predict_classes(x)
+
+    result = result.tolist()
+    ans = most_frequent(result)
+    if ans == 0:
+        result = "The Subject is Controlled !"
+    elif ans == 1:
+        result = "The Subject is currently suffering from MDD !"
+    else:
+        result = "The Subject had suffered from MDD in the past !"
+
+    return result
+
+
+
+
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
