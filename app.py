@@ -358,75 +358,17 @@ def startstream():
     srate = 100
     name = 'LSLExampleAmp'
     stream_type = 'EEG'
-    channel_names = [
-         'FP1',
-         'FPZ',
-         'FP2',
+    channel_names = ['FP1','FPZ','FP2',
          # 'lal',
-         'AF3',
-         'AF4',
-         'F7',
-         'F5',
-         'F3',
-         'F1',
-         'FZ',
-         'F2',
-         'F4',
-         'F6',
-         'F8',
-         'FT7',
-         'FC5',
-         'FC3',
-         'FC1',
-         'FCZ',
-         'FC2',
-         'FC4',
-         'FC6',
-         'FT8',
-         'T7',
-         'C5',
-         'C3',
-         'C1',
-         'CZ',
-         'C2',
-         'C4',
-         'C6',
-         'T8',
-         # 'M1',
-         'TP7',
-         'CP5',
-         'CP3',
-         'CP1',
-         'CPZ',
-         'CP2',
-         'CP4',
-         'CP6',
-         'TP8',
-         # 'M2',
-         'P7',
-         'P5',
-         'P3',
-         'P1',
-         'PZ',
-         'P2',
-         'P4',
-         'P6',
-         'P8',
-         'PO7',
-         'PO5',
-         'PO3',
-         'POZ',
-         'PO4',
-         'PO6',
-         'PO8',
+         'AF3','AF4','F7','F5','F3','F1','FZ','F2','F4','F6','F8','FT7','FC5','FC3','FC1','FCZ','FC2',
+         'FC4','FC6','FT8','T7','C5','C3','C1','CZ','C2','C4','C6','T8',
+              # 'M1',
+         'TP7','CP5','CP3','CP1','CPZ','CP2','CP4','CP6','TP8',
+           # 'M2',
+         'P7','P5','P3','P1','PZ','P2','P4','P6','P8','PO7','PO5','PO3','POZ','PO4','PO6','PO8',
          # 'CB1',
-         'O1',
-         'OZ',
-         'O2',
-         # 'CB2',
-         # 'HEOG',
-         # 'VEOG',
-         # 'Status'
+         'O1','OZ','O2',
+         # 'CB2','HEOG','VEOG','Status' 
          ]
     n_channels = len(channel_names)
     help_string = 'SendData.py -s <sampling_rate> -n <stream_name> -t <stream_type>'
@@ -612,11 +554,11 @@ def upload():
         result = result.tolist()
         ans = most_frequent(result)
         if ans == 0:
-            result = "The Subject is Controlled !"
+            result = "The Subject is Controlled."
         elif ans == 1:
-            result = "The Subject is currently suffering from MDD !"
+            result = "The Subject is currently suffering from Depression"
         else:
-            result = "The Subject had suffered from MDD in the past !"
+            result = "The Subject had suffered from Depression in the past."
         # print(ans)
         # Process your result for human
         # pred_class = preds.argmax(axis=-1)            # Simple argmax
