@@ -17,6 +17,7 @@ $(document).ready(function () {
             reader.readAsDataURL(input.files[0]);
         }
     }
+
     $("#imageUpload").change(function () {
         $('.image-section').show();
         $('#btn-predict').show();

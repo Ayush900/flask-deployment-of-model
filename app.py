@@ -358,17 +358,75 @@ def startstream():
     srate = 100
     name = 'LSLExampleAmp'
     stream_type = 'EEG'
-    channel_names = ['FP1','FPZ','FP2',
+    channel_names = [
+         'FP1',
+         'FPZ',
+         'FP2',
          # 'lal',
-         'AF3','AF4','F7','F5','F3','F1','FZ','F2','F4','F6','F8','FT7','FC5','FC3','FC1','FCZ','FC2',
-         'FC4','FC6','FT8','T7','C5','C3','C1','CZ','C2','C4','C6','T8',
-              # 'M1',
-         'TP7','CP5','CP3','CP1','CPZ','CP2','CP4','CP6','TP8',
-           # 'M2',
-         'P7','P5','P3','P1','PZ','P2','P4','P6','P8','PO7','PO5','PO3','POZ','PO4','PO6','PO8',
+         'AF3',
+         'AF4',
+         'F7',
+         'F5',
+         'F3',
+         'F1',
+         'FZ',
+         'F2',
+         'F4',
+         'F6',
+         'F8',
+         'FT7',
+         'FC5',
+         'FC3',
+         'FC1',
+         'FCZ',
+         'FC2',
+         'FC4',
+         'FC6',
+         'FT8',
+         'T7',
+         'C5',
+         'C3',
+         'C1',
+         'CZ',
+         'C2',
+         'C4',
+         'C6',
+         'T8',
+         # 'M1',
+         'TP7',
+         'CP5',
+         'CP3',
+         'CP1',
+         'CPZ',
+         'CP2',
+         'CP4',
+         'CP6',
+         'TP8',
+         # 'M2',
+         'P7',
+         'P5',
+         'P3',
+         'P1',
+         'PZ',
+         'P2',
+         'P4',
+         'P6',
+         'P8',
+         'PO7',
+         'PO5',
+         'PO3',
+         'POZ',
+         'PO4',
+         'PO6',
+         'PO8',
          # 'CB1',
-         'O1','OZ','O2',
-         # 'CB2','HEOG','VEOG','Status' 
+         'O1',
+         'OZ',
+         'O2',
+         # 'CB2',
+         # 'HEOG',
+         # 'VEOG',
+         # 'Status'
          ]
     n_channels = len(channel_names)
     help_string = 'SendData.py -s <sampling_rate> -n <stream_name> -t <stream_type>'
@@ -446,84 +504,86 @@ def startstream():
     return
 
 
-@app.route('/get_realtime_eeg_data',methods=['GET'])
+@app.route('/get_realtime_eeg_data' , methods=['POST' , 'GET'])
 def get_realtime_eeg_data():
-    startstream()
+    #startstream()
+    if request.method == 'POST':
+        seconds = int(request.form.get('seconds'))
+        print(seconds)
+        print(type(seconds))
 
+        print("looking for an EEG stream...")
+        streams = resolve_stream('type', 'EEG')
 
+        # create a new inlet to read from the stream
+        inlet = StreamInlet(streams[0])
 
-    print("looking for an EEG stream...")
-    streams = resolve_stream('type', 'EEG')
+        start_time = time.time()
+        #seconds = 180
 
-    # create a new inlet to read from the stream
-    inlet = StreamInlet(streams[0])
+        data=[]
 
-    start_time = time.time()
-    seconds = 15
+        while True:
 
-    data=[]
+            chunk, timestamps = inlet.pull_chunk()
+            if timestamps:
+                for i in chunk:
+                    data.append(i)
 
-    while True:
+            current_time = time.time()
+            elapsed_time = current_time - start_time
 
-        chunk, timestamps = inlet.pull_chunk()
-        if timestamps:
-            for i in chunk:
-                data.append(i)
+            if elapsed_time > seconds:
+                print("Finished iterating in: " + str(int(elapsed_time))  + " seconds")
+                break
 
-        current_time = time.time()
-        elapsed_time = current_time - start_time
+        index=[]
+        for i in range(len(data)):
+            index.append(str(i*4))
 
-        if elapsed_time > seconds:
-            print("Finished iterating in: " + str(int(elapsed_time))  + " seconds")
-            break
+        info = inlet.info()
 
-    index=[]
-    for i in range(len(data)):
-        index.append(str(i*4))
+        ch = info.desc().child("channels").child("channel")
 
-    info = inlet.info()
+        channels=[]
 
-    ch = info.desc().child("channels").child("channel")
+        for k in range(info.channel_count()):
+            channels.append(ch.child_value("label"))
+            ch = ch.next_sibling()
 
-    channels=[]
+        df = pd.DataFrame(data, columns = channels , index=index)
 
-    for k in range(info.channel_count()):
-        channels.append(ch.child_value("label"))
-        ch = ch.next_sibling()
+        df=channels_to_consider_realtime(df)
 
-    df = pd.DataFrame(data, columns = channels , index=index)
+        channels_remain=df.columns
 
-    df=channels_to_consider_realtime(df)
+        x=list(df.columns)
 
-    channels_remain=df.columns
+        for i in range(len(x)):
+            x[i]=i
 
-    x=list(df.columns)
+        df.columns = x
 
-    for i in range(len(x)):
-        x[i]=i
+        image_size = 28                                                                               # 1 = current_mdd
+        frame_duration = 1.0                                                                          # 2 = past_mdd
+        overlap = 0.5
+        images = make_data_pipeline(df,image_size,frame_duration,overlap)
+        x = images
 
-    df.columns = x
+        print(x)
 
-    image_size = 28                                                                               # 1 = current_mdd
-    frame_duration = 1.0                                                                          # 2 = past_mdd
-    overlap = 0.5
-    images = make_data_pipeline(df,image_size,frame_duration,overlap)
-    x = images
+        result = model.predict_classes(x)
 
-    print(x)
-
-    result = model.predict_classes(x)
-
-    result = result.tolist()
-    ans = most_frequent(result)
-    if ans == 0:
-        result = "The Subject is Controlled !"
-    elif ans == 1:
-        result = "The Subject is currently suffering from MDD !"
-    else:
-        result = "The Subject had suffered from MDD in the past !"
-
-    return result
+        result = result.tolist()
+        ans = most_frequent(result)
+        if ans == 0:
+            result = "The Subject is Controlled !"
+        elif ans == 1:
+            result = "The Subject is currently suffering from MDD !"
+        else:
+            result = "The Subject had suffered from MDD in the past !"
+        print(result)
+    return render_template("index.html",result=result)
 
 
 
@@ -554,11 +614,11 @@ def upload():
         result = result.tolist()
         ans = most_frequent(result)
         if ans == 0:
-            result = "The Subject is Controlled."
+            result = "The Subject is Controlled !"
         elif ans == 1:
-            result = "The Subject is currently suffering from Depression"
+            result = "The Subject is currently suffering from MDD !"
         else:
-            result = "The Subject had suffered from Depression in the past."
+            result = "The Subject had suffered from MDD in the past !"
         # print(ans)
         # Process your result for human
         # pred_class = preds.argmax(axis=-1)            # Simple argmax
