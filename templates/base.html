@@ -53,7 +53,7 @@
 
 
 
-    <div style="background-color: #bdc1c5;">
+    <div style="background-color: rgb(45,46,48) ;">
    <div class="container">
     <nav class="navbar navbar-expand-md transparent ">
         <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
@@ -136,17 +136,17 @@
                         </tr>
                     </tbody>
                 </table>
-                <h6 style="text-align: center;">*Please refer to Data Format Table for details regarding data*</h6>
+                <h6 style="text-align: center; color: rgb(43, 142, 248) ;">*Please refer to Data Format Table for details regarding data*</h6>
             </div>
     <div class="col-6">
-        <p style="margin-top: 20%; ">
+        <p style="margin-top: 20% ; font-weight: bold; font-size: 135%; ">
             To detect depression using recorded EEG data-
-            <ul>
-                <li>Click on the “Upload files” and upload data</li>
-                <li>Click on the “Predict” button that appears after uploading data</li>
+            <ul >
+                <li>Click on the <b> “Upload files” </b>and upload data</li>
+                <li>Click on the <b>“Predict”</b> button that appears after uploading data</li>
                 <li>Result will be displayed</li>
             </ul>
-
+            <!-- color: rgb(23, 143, 177) -->
         </p>
         <form id="upload-file" method="post" enctype="multipart/form-data" style="margin-top: 2%;  text-align: center;   
         " >
@@ -180,7 +180,7 @@
 <div class="container" >
     <div class="row">
         <div class="col-1"></div>
-        <div class="col-10"><h3 id="result" style="color: #2f8be0; background-color: whitesmoke; text-align: center;"></h3></div>
+        <div class="col-10"><h3 id="result" style="color: rgb(43, 142, 248); background-color: whitesmoke; text-align: center;"></h3></div>
         <div class="col-1"></div>
     </div>
 
@@ -199,11 +199,11 @@
 <div class="container " id="dynamicid" style=" margin-top: 5%;">
     <div class="row">
         <div class="col-6">
-            <p style="margin-top: 10%;margin-left: 5%;">To detect depression using auto generated data-
+            <p style="margin-top: 10%;margin-left: 5%; font-weight: bold; font-size: 135%;">To detect depression using auto generated data-
                 <ul style ="margin-left: 5%;">
                     <li>Enter the time(in seconds) according to limit
                         </li>
-                    <li>Click on "Submit" button
+                    <li>Click on <b> "Submit" </b>button
                         </li>
                     <li>Result will be displayed</li>
                 </ul></p>
@@ -216,8 +216,8 @@
         </div>
         <div class="col-6">
 
-            <p style="margin-top: 15%;text-align: left;">
-                This is demonstration to detect Depression when our model receives data from Lab Streaming Layer.<br><br>
+            <p style="margin-top: 15%;text-align: left;color: rgb(43, 142, 248);font-size: 120%;">
+                This is demonstration to detect Depression when our model receives data from <b> Lab Streaming Layer</b>.<br><br>
                 The total time for which the data must be collected can be given as input and the result is predicted according to the recorded data.
             </p>
         </div>
@@ -229,7 +229,7 @@
     
 <!-- result dynamic display -->
 
-<h3  style="color: #2f8be0; background-color: whitesmoke; text-align: center;">{{result}}</h3>
+<h3  style="color: rgb(43, 142, 248); background-color: whitesmoke; text-align: center;">{{result}}</h3>
 
     
 <!-- end result dynamic display -->
@@ -248,7 +248,7 @@
 
 
         <!-- Footer -->
-    <footer class="page-footer font-small " style="background-color:rgb(46, 55, 86) ;">
+    <footer class="page-footer font-small " style="background-color:rgb(45, 46, 48) ;">
 
         
         <div class="footer-copyright text-center py-3" style="color: white;">© 2021 Copyright:

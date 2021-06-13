@@ -333,8 +333,8 @@ def model_predict(file_path, model):
     x = clean_EEG(raw)
     # x = np.true_divide(x, 255)
     # x = np.expand_dims(x, axis=0)
-    image_size = 28                                                                               # 1 = current_mdd
-    frame_duration = 1.0                                                                          # 2 = past_mdd
+    image_size = 28                                                                               
+    frame_duration = 1.0                                                                          
     overlap = 0.5
     images = make_data_pipeline(x,image_size,frame_duration,overlap)
     x = images
@@ -564,8 +564,8 @@ def get_realtime_eeg_data():
 
         df.columns = x
 
-        image_size = 28                                                                               # 1 = current_mdd
-        frame_duration = 1.0                                                                          # 2 = past_mdd
+        image_size = 28                                                                               
+        frame_duration = 1.0                                                                          
         overlap = 0.5
         images = make_data_pipeline(df,image_size,frame_duration,overlap)
         x = images
@@ -577,11 +577,11 @@ def get_realtime_eeg_data():
         result = result.tolist()
         ans = most_frequent(result)
         if ans == 0:
-            result = "The Subject is Controlled !"
+            result = "The Subject is CONTROLLED(not suffering from depression)"
         elif ans == 1:
-            result = "The Subject is currently suffering from MDD !"
+            result = "The Subject is currently suffering from DEPRESSION"
         else:
-            result = "The Subject had suffered from MDD in the past !"
+            result = "The Subject had suffered from DEPRESSION in the past"
         print(result)
     return render_template("index.html",result=result)
 
@@ -614,11 +614,11 @@ def upload():
         result = result.tolist()
         ans = most_frequent(result)
         if ans == 0:
-            result = "The Subject is Controlled !"
+            result = "The Subject is CONTROLLED(not suffering from depression)"
         elif ans == 1:
-            result = "The Subject is currently suffering from MDD !"
+            result = "The Subject is currently suffering from DEPRESSION"
         else:
-            result = "The Subject had suffered from MDD in the past !"
+            result = "The Subject had suffered from DEPRESSION in the past"
         # print(ans)
         # Process your result for human
         # pred_class = preds.argmax(axis=-1)            # Simple argmax
